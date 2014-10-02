@@ -209,21 +209,44 @@ Now we'll copy the `picamera` code we just used to take a picture in to the `twi
     with PiCamera() as camera:
         camera.start_preview()
         sleep(3)
-        camera.capture('/home/pi/image2.jpg')
+        camera.capture('/home/pi/image.jpg')
         camera.stop_preview()
 
     message = "Here's a Pi camera picture!"
-    with open('/home/pi/image2.jpg', 'rb') as photo:
+    with open('/home/pi/image.jpg', 'rb') as photo:
         twitter.update_status_with_media(status=message, media=photo)
     ```
 
-    Be sure to use the correct file path - it should be the same in both places.
-
-1. Now run the code and it will save to `image2.jpg` in the home folder and upload it to Twitter.
+1. Now run the code and it will save to `image.jpg` in the home folder and upload it to Twitter.
 
 1. Check Twitter to see if it worked!
 
     ![](images/twitter-picamera.png)
+
+## Use a timestamp
+
+Now let's fix the hard-coded filename of `image.jpg` and use something more dynamic. It would be better to timestamp the filename so it will never get written over. And we should store it in a folder inside our project.
+
+1. In the terminal window, create a new folder inside `twitter-babbage` called `photos` with `mkdir photos`.
+
+1. Import the `datetime` function with `from datetime import datetime`.
+
+1. Save the timestamp as a variable before taking the picture and pass this in to the path string:
+
+```python
+timestamp = datetime.now().isoformat()
+photo_path = '/home/pi/tweeting-babbage/photos/%s' % timestamp
+camera.capture(photo_path)
+```
+
+1. Also change the `update_status_with_media()` call with this new photo path:
+
+```python
+with open(photo_path, 'rb') as photo:
+    twitter.update_status_with_media(status=message, media=photo)
+```
+
+1. Run the code again and it should save the image in the `tweeting-babbage/photos` folder and tweet it as usual.
 
 ## Wire up a GPIO button
 
@@ -253,7 +276,7 @@ Now we'll add a hardware button that we'll use to trigger the camera.
     ```python
     camera.start_preview()
     GPIO.wait_for_edge(17, GPIO.FALLING)
-    camera.capture('/home/pi/image3.jpg')
+    camera.capture(photo_path)
     ```
 
     `GPIO.wait_for_edge()` is the trigger. It means "wait for an input on pin 17". The code will pause on that line until it receives a button press.
@@ -275,26 +298,3 @@ Now we've got the button triggering the camera and we know we can tweet pictures
 1. Change the `capture()` line to save to `image4.jpg` this time, then run the code.
 
 1. Press the button when the preview appears, and it should tweet the picture from the camera.
-
-    Now let's fix the hard-coded filename of `image4.jpg` and use something more dynamic. It would be better to timestamp the filename so it will never get written over. And we should store it in a folder inside our project.
-
-1. In the terminal window, create a new folder inside `twitter-babbage` called `photos` with `mkdir photos`.
-
-1. Import the `datetime` function with `from datetime import datetime`.
-
-1. Save the timestamp as a variable before taking the picture and pass this in to the path string:
-
-    ```python
-    timestamp = datetime.now().isoformat()
-    photo_path = '/home/pi/tweeting-babbage/photos/%s' % timestamp
-    camera.capture(photo_path)
-    ```
-
-1. Also change the `update_status_with_media()` call with this new photo path:
-
-    ```python
-    with open(photo_path, 'rb') as photo:
-        twitter.update_status_with_media(status=message, media=photo)
-    ```
-
-1. Run the code again and it should save the image in the `tweeting-babbage/photos` folder and tweet it as usual.
