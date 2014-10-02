@@ -113,7 +113,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
     def main():
         message = "Hello world!"
         twitter.update_status(status=message)
-        print ("Tweeted: %s" % message)
+        print("Tweeted: %s" % message)
 
     if __name__ == '__main__':
         main()
@@ -144,3 +144,28 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
     This opens the file and uses the `update_status_with_media()` function to upload the image along with the tweet text.
 
 1. Run the code and see if it tweets the text and image together!
+
+## Take a picture with the Pi camera
+
+1. With the Pi switched off, connect the camera to the camera port.
+
+1. Boot the Pi and from the command line or LXTerminal, test it works with the command `raspistill -k`. If you see the camera's image on the screen, you know it's working. Press `Ctrl + C` to exit the preview.
+
+1. Now open a new Python window in IDLE3, save as `camera.py` and enter the following code:
+
+    ```python
+    from picamera import PiCamera
+    from time import sleep
+
+    with PiCamera() as camera:
+        camera.start_preview()
+        sleep(3)
+        camera.capture('/home/pi/image.jpg')
+        camera.stop_preview()
+    ```
+
+    This is a test script to check we can take a picture from Python.
+
+1. Run with `F5` and you should see a preview on the screen for 3 seconds before the camera takes the picture.
+
+1. Open the file manager and you should see `image.jpg`. Double click the icon to open it up.
