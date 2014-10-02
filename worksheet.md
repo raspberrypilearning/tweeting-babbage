@@ -71,6 +71,17 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         )
     ```
 
+1. Make a connection with the Twitter API using this set of keys:
+
+    ```python
+    twitter = Twython(
+        consumer_key,
+        consumer_secret,
+        access_token,
+        access_token_secret
+        )
+    ```
+
 1. Create a `main()` function which will be called when the script is run. We'll start with a basic "Hello world" tweet to test the connection works:
 
     ```python
@@ -79,14 +90,16 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         twitter.update_status(status=message)
     ```
 
-    We'll also add an instruction at the end to run the `main()` method when the script is called directly:
+    This uses the API's `update_status()` function to send a text tweet containing the text "Hello world!".
+
+1. We'll also add an instruction at the end to run the `main()` method when the script is called directly:
 
     ```python
     if __name__ == '__main__':
         main()
     ```
 
-1. Your code should now look like this:
+    Your code should now look like this:
 
     ```python
     from twython import Twython
@@ -111,3 +124,23 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
 Note that sending multiple tweets with the exact same text are classed as duplicates and rejected by Twitter. If you want to test it again, try tweeting a different message.
 
 If you see an error, your API keys may be incorrect. Be sure to copy them exactly and check the spelling of the variables. Also check your Pi is online.
+
+## Tweet a picture
+
+Now the Twitter connection has been tested, let's try to upload a picture. Rather than try to hook up the camera now we'll test it independently.
+
+1. Find a picture, copy one to your Raspberry Pi or download one from the internet and save it to your home folder. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
+
+1. Modify the `main()` function in the code accordingly:
+
+    ```python
+    message = "Hello world - here's a picture!"
+    with open('/home/pi/Downloads/image.jpg', 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
+    ```
+
+    Making sure to get full path to the image correctly.
+
+    This opens the file and uses the `update_status_with_media()` function to upload the image along with the tweet text.
+
+1. Run the code and see if it tweets the text and image together!
