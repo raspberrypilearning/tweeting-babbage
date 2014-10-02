@@ -30,6 +30,8 @@ You might also want to upload a photo and fill out the bio.
 
 1. You should now be able to see your **Consumer key**, **Consumer secret**, **Access token** and **Access token secret**. You'll need these four keys to connect to your Twitter account from your Python code. Don't share these keys with anyone as they can be used (without the account's password). If you share your code online, make sure not to include these keys. If you ever accidentally share or publish these keys, you should regenerate the keys at [apps.twitter.com](https://apps.twitter.com).
 
+![](images/twitter-keys.png)
+
 ## Connect to Twitter from Python
 
 Before we perform surgery on Babbage and insert a camera up his rear end, let's get the code doing what we want it to.
@@ -121,15 +123,21 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
 
 1. Now save (`Ctrl + S`) and run with `F5`. You should see the message "Tweeted: Hello world!". Go to your Twitter profile in a web browser to verify it sent! This will be at `twitter.com/username` where `username` is your Twitter account's username.
 
+![](images/twitter-hello-world.png)
+
 Note that sending multiple tweets with the exact same text are classed as duplicates and rejected by Twitter. If you want to test it again, try tweeting a different message.
 
 If you see an error, your API keys may be incorrect. Be sure to copy them exactly and check the spelling of the variables. Also check your Pi is online.
+
+![](images/twitter-api-error.png)
 
 ## Tweet a picture
 
 Now the Twitter connection has been tested, let's try to upload a picture. Rather than try to hook up the camera now we'll test it independently.
 
 1. Find a picture, copy one to your Raspberry Pi or download one from the internet and save it to your home folder. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
+
+    ![](images/file-manager-image.png)
 
 1. Modify the `main()` function in the code accordingly:
 
@@ -145,9 +153,13 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 
 1. Run the code and see if it tweets the text and image together!
 
+    ![](images/tweet-image.png)
+
 ## Take a picture with the Pi camera
 
 1. With the Pi switched off, connect the camera to the camera port.
+
+    ![](images/connect-camera.png)
 
 1. Boot the Pi and from the command line or LXTerminal, test it works with the command `raspistill -k`. If you see the camera's image on the screen, you know it's working. Press `Ctrl + C` to exit the preview.
 
@@ -169,3 +181,5 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 1. Run with `F5` and you should see a preview on the screen for 3 seconds before the camera takes the picture.
 
 1. Open the file manager and you should see `image.jpg`. Double click the icon to open it up.
+
+    ![](images/file-manager.png)
