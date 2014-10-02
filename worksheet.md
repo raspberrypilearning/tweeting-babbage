@@ -135,6 +135,36 @@ If you see an error, your API keys may be incorrect. Be sure to copy them exactl
 
 ![](images/twitter-api-error.png)
 
+## Tweet Random messages
+
+Now we can send some text as a tweet, let's mix it up a bit.
+
+1. First, import the random choice function:
+
+    ```python
+    import random.choice
+    ```
+
+    This function takes a list and returns a single entry at random.
+
+1. Now create a list of messages like so:
+
+    ```python
+    messages = [
+        "Hello world",
+        "Hi there",
+        "My name is Babbage",
+        "What's up?",
+        "How's it going?",
+        "Have you been here before?",
+        "Get a hair cut!",
+        ]
+    ```
+
+1. Replace `message = "Hello world!"` with `message = random.choice(messages)`.
+
+1. Run the code again two or more times to see different messages being tweeted at random.
+
 ## Tweet a picture
 
 Now the Twitter connection has been tested, let's try to upload a picture. Rather than try to hook up the camera now we'll test it independently.
@@ -235,9 +265,11 @@ Now let's fix the hard-coded filename of `image.jpg` and use something more dyna
 
 ```python
 timestamp = datetime.now().isoformat()
-photo_path = '/home/pi/tweeting-babbage/photos/%s' % timestamp
+photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
 camera.capture(photo_path)
 ```
+
+    The timestamp is formatted like `2014-10-02T05:10:25.642155`.
 
 1. Also change the `update_status_with_media()` call with this new photo path:
 
@@ -296,3 +328,66 @@ Now we've got the button triggering the camera and we know we can tweet pictures
 1. Add the `wait_for_edge()` line before the capture. You probably want to leave the `sleep()` in this time.
 
 1. Press the button when the preview appears, and it should tweet the picture from the camera.
+
+## Final code
+
+Your final code should look something like this:
+
+```python
+from twython import Twython
+from picamera import PiCamera
+from time import sleep
+from datetime import datetime
+import RPi.GPIO as GPIO
+import random.choice
+from auth import (
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
+    )
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.IN, GPIO.PUD_UP)
+
+twitter = Twython(
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
+    )
+
+messages = [
+    "Hello world",
+    "Hi there",
+    "My name is Babbage",
+    "What's up?",
+    "How's it going?",
+    "Have you been here before?",
+    "Get a hair cut!",
+    ]
+
+def main():
+    message = random.choice(messages)
+
+    with PiCamera() as camera:
+        camera.start_preview()
+        GPIO.wait_for_edge(17, GPIO.FALLING)
+        timestamp = datetime.now().isoformat()
+        photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+        sleep(3)
+        camera.capture(photo_path)
+        camera.stop_preview()
+
+    with open(photo_path, 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
+
+if __name__ == '__main__':
+    main()
+```
+
+But feel free to make any modifications you see fit!
+
+## Tweeting Babbage
+
+Now we have the code doing exactly what we want, let's put it in to action (or in to Babbage, to be more precise).
