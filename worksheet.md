@@ -218,3 +218,40 @@ Now we'll copy the `picamera` code we just used to take a picture in to the `twi
 1. Check Twitter to see if it worked!
 
     ![](images/twitter-picamera.png)
+
+## Wire up a GPIO button
+
+Now we'll add a hardware button that we'll use to trigger the camera.
+
+1. Connect the button to the breadboard and wire it up to Ground and GPIO 17 like so:
+
+    ![](images/gpio-diagram.png)
+
+1. Return to the `camera.py` script to test it out. First import the GPIO library at the top:
+
+    ```python
+    import RPi.GPIO as GPIO
+    ```
+
+1. Then add some lines between the imports and the main code to set up the GPIO pins:
+
+    ```python
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(17, GPIO.IN, GPIO.PUD_UP)
+    ```
+
+    This configures the code to use the Broadcom (`BCM`) pin numbering system (as opposed to `BOARD`) and sets up GPIO pin 17 as an input.
+
+1. Now just add the button press trigger before taking the picture. It should go between `start_preview()` and `capture()` - you can remove the `sleep()`:
+
+    ```python
+    camera.start_preview()
+    GPIO.wait_for_edge(17, GPIO.FALLING)
+    camera.capture('/home/pi/image3.jpg')
+    ```
+
+    `GPIO.wait_for_edge()` is the trigger. It means "wait for an input on pin 17". The code will pause on that line until it receives a button press.
+
+1. Run the code and you should see a preview of the camera picture. When you press the button it should take a picture and exit the preview.
+
+If your button press has no effect, make sure your button is wired up correctly and to the correct pins. If you can't get it to work try pressing `Ctrl + C` while pressing the button to try to force an exit.
