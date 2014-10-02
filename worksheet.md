@@ -40,9 +40,17 @@ We need to register our application with Twitter to get keys which allow us to a
 
 Before we perform surgery on Babbage and insert a camera up his rear end, let's get the code doing what we want it to.
 
-1. Boot your Raspberry Pi to the Desktop.
+1. Boot your Raspberry Pi to the Desktop and launch `LXTerminal`
 
-1. Launch `LXTerminal` from the Desktop and create a folder for your project with the following command:
+1. Because the Raspberry Pi doesn't have a real-time clock, we must start by setting the date on the system with the command:
+
+    ```bash
+    sudo date -s "2 OCT 2014 12:00:00"
+    ```
+
+    with the correct date. This is important as without the correct time we won't be able to connect to Twitter.
+
+1. Create a folder for your project with the following command:
 
     ```bash
     mkdir tweeting-babbage
@@ -54,7 +62,11 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
     touch auth.py babbage.py tweeting-babbage.py
     ```
 
-1. Launch `IDLE3` from the Desktop and open these three Python files by clicking `File > Open`, navigating to the `tweeting-babbage` folder and highlighting all the files.
+1. Launch these Python files in `IDLE3` with root permissions (you'll need this for the GPIO) with the command:
+
+    ```
+    sudo idle3 *.py &
+    ```
 
 1. In `auth.py` paste your API keys from [apps.twitter.com](https://apps.twitter.com) in to variables like so:
 
