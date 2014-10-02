@@ -51,7 +51,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
 1. Enter this folder with `cd tweeting-babbage` and create the files we'll be using:
 
     ```bash
-    touch auth.py twitter.py tweeting-babbage.py
+    touch auth.py babbage.py tweeting-babbage.py
     ```
 
 1. Launch `IDLE3` from the Desktop and open these three Python files by clicking `File > Open`, navigating to the `tweeting-babbage` folder and highlighting all the files.
@@ -65,7 +65,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
     access_token_secret = '0987654321ZYXWVUTSRQPONMLKJIHFEDCBA'
     ```
 
-1. Save `auth.py` and go to `twitter.py`. Import the `twython` library and the variables from `auth.py`:
+1. Save `auth.py` and go to `babbage.py`. Import the `twython` library and the variables from `auth.py`:
 
     ```python
     from twython import Twython
@@ -192,7 +192,7 @@ Now we know we can upload a given picture to Twitter, let's take one with the Pi
 
 ## Tweet a picture from the Pi camera
 
-Now we'll copy the `picamera` code we just used to take a picture in to the `twitter.py` file to make it tweet the photo taken by the Pi camera.
+Now we'll copy the `picamera` code we just used to take a picture in to the `babbage.py` file to make it tweet the photo taken by the Pi camera.
 
 1. First add the `import` lines at the top:
 
@@ -289,7 +289,7 @@ If your button press has no effect, make sure your button is wired up correctly 
 
 ## Put it all together
 
-Now we've got the button triggering the camera and we know we can tweet pictures taken with the camera, let's put it all together in `twitter.py`.
+Now we've got the button triggering the camera and we know we can tweet pictures taken with the camera, let's put it all together in `babbage.py`.
 
 1. Add the GPIO library import and GPIO setup lines to the top.
 
