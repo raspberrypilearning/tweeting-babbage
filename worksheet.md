@@ -183,3 +183,38 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 1. Open the file manager and you should see `image.jpg`. Double click the icon to open it up.
 
     ![](images/file-manager.png)
+
+## Tweet a picture from the Pi camera
+
+Now we'll copy the `picamera` code we just used to take a picture in to the `twitter.py` file.
+
+1. First add the `import` lines at the top:
+
+    ```python
+    from picamera import PiCamera
+    from time import sleep
+    ```
+
+    Imports are best kept at the top of the line before anything else.
+
+1. Then add the `picamera` lines in the `main()` method:
+
+    ```python
+    with PiCamera() as camera:
+        camera.start_preview()
+        sleep(3)
+        camera.capture('/home/pi/image2.jpg')
+        camera.stop_preview()
+
+    message = "Here's a Pi camera picture!"
+    with open('/home/pi/image2.jpg', 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
+    ```
+
+    Be sure to use the correct file path - it should be the same in both places.
+
+1. Now run the code and it will save to `image2.jpg` in the home folder and upload it to Twitter.
+
+1. Check Twitter to see if it worked!
+
+    ![](images/twitter-picamera.png)
