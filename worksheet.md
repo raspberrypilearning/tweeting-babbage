@@ -22,13 +22,13 @@ We need to register our application with Twitter to get keys which allow us to a
 
 1. Complete the application details form. You must enter an application name, description, website (this can be `http://www.raspberrypi.org` if you don't have one). Leave the Callback URL field blank and proceed.
 
+    ![](images/app-details.png)
+
 1. Modify your app permissions from **Read only** to **Read and write**.
 
     ![](images/read-and-write.png)
 
 1. Click the 'Keys and Access Tokens' tab and create an access token.
-
-    ![](images/create-access-token.png)
 
 1. Once you've clicked the **Create an Access Token** button, refresh the page and you'll see a new section beneath the **Application Settings** with your access token details.
 
@@ -183,8 +183,6 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 
 1. Find a picture, copy one to your Raspberry Pi or download one from the internet and save it to your home folder. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
 
-    ![](images/file-manager-image.png)
-
 1. Modify the `main()` function in the code accordingly:
 
     ```python
@@ -230,8 +228,6 @@ Now we know we can upload a given picture to Twitter, let's take one with the Pi
 
 1. Open the file manager and you should see `image.jpg`. Double click the icon to open it up.
 
-    ![](images/file-manager.png)
-
 ## Tweet a picture from the Pi camera
 
 Now we'll copy the `picamera` code we just used to take a picture in to the `babbage.py` file to make it tweet the photo taken by the Pi camera.
@@ -263,7 +259,7 @@ Now we'll copy the `picamera` code we just used to take a picture in to the `bab
 
 1. Check Twitter to see if it worked!
 
-    ![](images/twitter-picamera.png)
+    ![](images/tweet-photo.png)
 
 ## Use a timestamp
 
@@ -329,7 +325,7 @@ Now we'll add a hardware button that we'll use to trigger the camera.
 
 ![](images/gpio-setup.png)
 
-If your button press has no effect, make sure your button is wired up correctly and to the correct pins. If you can't get it to work try pressing `Ctrl + C` while pressing the button to try to force an exit.
+If your button press has no effect, make sure it is wired up correctly and to the correct pins. If you can't get it to work try pressing `Ctrl + C` while pressing the button to try to force an exit.
 
 ## Put it all together
 
