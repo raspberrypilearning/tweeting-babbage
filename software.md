@@ -15,7 +15,7 @@ Now install the packages you'll need:
 
 ```bash
 sudo apt-get install python3-picamera python3-pip
-sudo pip-3.3 install twython
+sudo pip-3.2 install twython
 ```
 
 Test you have everything you need by entering the following command:
