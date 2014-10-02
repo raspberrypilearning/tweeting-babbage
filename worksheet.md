@@ -4,6 +4,8 @@ Make a Babbage Bear that takes photos and sends tweets!
 
 ## Create a Twitter Account
 
+First we need to create a Twitter account to use for the project.
+
 1. Create a Twitter account for your Babbage Bear at [twitter.com](https://twitter.com)
 
     ![](images/create-twitter.png)
@@ -11,6 +13,8 @@ Make a Babbage Bear that takes photos and sends tweets!
 You might also want to upload a photo and fill out the bio.
 
 ## Create a Twitter Application
+
+We need to register our application with Twitter to get keys which allow us to access the Twitter account from Python using the Twitter API (Application Programming Interface).
 
 1. Go to [apps.twitter.com](https://apps.twitter.com) and click the **Create New App** button.
 
@@ -157,6 +161,8 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 
 ## Take a picture with the Pi camera
 
+Now we know we can upload a given picture to Twitter, let's take one with the Pi camera.
+
 1. With the Pi switched off, connect the camera to the camera port.
 
     ![](images/connect-camera.png)
@@ -186,7 +192,7 @@ Now the Twitter connection has been tested, let's try to upload a picture. Rathe
 
 ## Tweet a picture from the Pi camera
 
-Now we'll copy the `picamera` code we just used to take a picture in to the `twitter.py` file.
+Now we'll copy the `picamera` code we just used to take a picture in to the `twitter.py` file to make it tweet the photo taken by the Pi camera.
 
 1. First add the `import` lines at the top:
 
@@ -253,5 +259,7 @@ Now we'll add a hardware button that we'll use to trigger the camera.
     `GPIO.wait_for_edge()` is the trigger. It means "wait for an input on pin 17". The code will pause on that line until it receives a button press.
 
 1. Run the code and you should see a preview of the camera picture. When you press the button it should take a picture and exit the preview.
+
+![](images/gpio-setup.png)
 
 If your button press has no effect, make sure your button is wired up correctly and to the correct pins. If you can't get it to work try pressing `Ctrl + C` while pressing the button to try to force an exit.
