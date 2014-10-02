@@ -295,6 +295,4 @@ Now we've got the button triggering the camera and we know we can tweet pictures
 
 1. Add the `wait_for_edge()` line before the capture. You probably want to leave the `sleep()` in this time.
 
-1. Change the `capture()` line to save to `image4.jpg` this time, then run the code.
-
 1. Press the button when the preview appears, and it should tweet the picture from the camera.
