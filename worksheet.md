@@ -86,7 +86,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         consumer_secret,
         access_token,
         access_token_secret
-        )
+    )
     ```
 
 1. Make a connection with the Twitter API using this set of keys:
@@ -97,7 +97,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         consumer_secret,
         access_token,
         access_token_secret
-        )
+    )
     ```
 
 1. Create a `main()` function which will be called when the script is run. We'll start with a basic "Hello world" tweet to test the connection works:
@@ -126,7 +126,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         consumer_secret,
         access_token,
         access_token_secret
-        )
+    )
 
     def main():
         message = "Hello world!"
@@ -170,7 +170,7 @@ Now we can send some text as a tweet, let's mix it up a bit.
         "How's it going?",
         "Have you been here before?",
         "Get a hair cut!",
-        ]
+    ]
     ```
 
 1. Replace `message = "Hello world!"` with `message = random.choice(messages)`.
@@ -205,7 +205,7 @@ Now we know we can upload a given picture to Twitter, let's take one with the Pi
 
 1. With the Pi switched off, connect the camera to the camera port.
 
-    ![](images/connect-camera.png)
+    ![](images/connect-camera.jpg)
 
 1. Boot the Pi and from the command line or LXTerminal, test it works with the command `raspistill -k`. If you see the camera's image on the screen, you know it's working. Press `Ctrl + C` to exit the preview.
 
@@ -250,9 +250,9 @@ Now we'll copy the `picamera` code we just used to take a picture in to the `bab
         camera.capture('/home/pi/image.jpg')
         camera.stop_preview()
 
-    message = "Here's a Pi camera picture!"
-    with open('/home/pi/image.jpg', 'rb') as photo:
-        twitter.update_status_with_media(status=message, media=photo)
+        message = "Here's a Pi camera picture!"
+        with open('/home/pi/image.jpg', 'rb') as photo:
+            twitter.update_status_with_media(status=message, media=photo)
     ```
 
 1. Now run the code and it will save to `image.jpg` in the home folder and upload it to Twitter.
@@ -292,7 +292,15 @@ with open(photo_path, 'rb') as photo:
 
 Now we'll add a hardware button that we'll use to trigger the camera.
 
-1. Connect the button to the breadboard and wire it up to Ground and GPIO 17 like so:
+1. Connect the button to the wires and attach by clamping with a pair of pliers.
+
+    ![](images/button-wire-pliers.jpg)
+
+1. Flatten the remaining two button feet.
+
+    ![](images/flatten-button-feet.jpg)
+
+1. Wire it up to Ground and GPIO 14 like so:
 
     ![](images/gpio-diagram.png)
 
@@ -306,24 +314,24 @@ Now we'll add a hardware button that we'll use to trigger the camera.
 
     ```python
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(17, GPIO.IN, GPIO.PUD_UP)
+    GPIO.setup(14, GPIO.IN, GPIO.PUD_UP)
     ```
 
-    This configures the code to use the Broadcom (`BCM`) pin numbering system (as opposed to `BOARD`) and sets up GPIO pin 17 as an input.
+    This configures the code to use the Broadcom (`BCM`) pin numbering system (as opposed to `BOARD`) and sets up GPIO pin 14 as an input.
 
-1. Now just add the button press trigger before taking the picture. It should go between `start_preview()` and `capture()` - you can remove the `sleep()`:
+1. Now just add the button press trigger before taking the picture. It should go between `start_preview()` and `capture()` - you can remove the `sleep()` for now:
 
     ```python
     camera.start_preview()
-    GPIO.wait_for_edge(17, GPIO.FALLING)
+    GPIO.wait_for_edge(14, GPIO.FALLING)
     camera.capture(photo_path)
     ```
 
-    `GPIO.wait_for_edge()` is the trigger. It means "wait for an input on pin 17". The code will pause on that line until it receives a button press.
+    `GPIO.wait_for_edge()` is the trigger. It means "wait for an input on pin 14". The code will pause on that line until it receives a button press.
+
+    ![](images/gpio-camera-setup.jpg)
 
 1. Run the code and you should see a preview of the camera picture. When you press the button it should take a picture and exit the preview.
-
-![](images/gpio-setup.png)
 
 If your button press has no effect, make sure it is wired up correctly and to the correct pins. If you can't get it to work try pressing `Ctrl + C` while pressing the button to try to force an exit.
 
@@ -336,6 +344,29 @@ Now we've got the button triggering the camera and we know we can tweet pictures
 1. Add the `wait_for_edge()` line before the capture. You probably want to leave the `sleep()` in this time.
 
 1. Press the button when the preview appears, and it should tweet the picture from the camera.
+
+## Add continuation
+
+Next we'll add a loop so a picture is taken every time the button is pressed.
+
+1. Remove the preview from the code as we won't have a screen attached. Remove the `start_preview()` and `stop_preview()` lines.
+
+1. Add a `while` loop to make the button press camera trigger continue indefinitely:
+
+    ```python
+    with PiCamera() as camera:
+        while True:
+            GPIO.wait_for_edge(14, GPIO.FALLING)
+            timestamp = datetime.now().isoformat()
+            photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+            sleep(3)
+            camera.capture(photo_path)
+
+            with open(photo_path, 'rb') as photo:
+                twitter.update_status_with_media(status=message, media=photo)
+    ```
+
+    Make sure all the code is indented to be inside the `while` loop.
 
 ## Final code
 
@@ -356,14 +387,14 @@ from auth import (
     )
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN, GPIO.PUD_UP)
+GPIO.setup(14, GPIO.IN, GPIO.PUD_UP)
 
 twitter = Twython(
     consumer_key,
     consumer_secret,
     access_token,
     access_token_secret
-    )
+)
 
 messages = [
     "Hello world",
@@ -373,22 +404,21 @@ messages = [
     "How's it going?",
     "Have you been here before?",
     "Get a hair cut!",
-    ]
+]
 
 def main():
     message = random.choice(messages)
 
     with PiCamera() as camera:
-        camera.start_preview()
-        GPIO.wait_for_edge(17, GPIO.FALLING)
-        timestamp = datetime.now().isoformat()
-        photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
-        sleep(3)
-        camera.capture(photo_path)
-        camera.stop_preview()
+        while True:
+            GPIO.wait_for_edge(14, GPIO.FALLING)
+            timestamp = datetime.now().isoformat()
+            photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+            sleep(3)
+            camera.capture(photo_path)
 
-    with open(photo_path, 'rb') as photo:
-        twitter.update_status_with_media(status=message, media=photo)
+            with open(photo_path, 'rb') as photo:
+                twitter.update_status_with_media(status=message, media=photo)
 
 if __name__ == '__main__':
     main()
@@ -396,6 +426,92 @@ if __name__ == '__main__':
 
 But feel free to make any modifications you see fit!
 
+Test it works by navigating to the `tweeting-babbage` folder in the terminal with `cd` and running `python3 babbage.py`. Press `Ctrl + C` to exit.
+
+## Automation
+
+Lastly we'll make the Python script run as soon as the Pi boots as we won't have a monitor attached.
+
+1. Open the `rc.local` file for editing from the command line:
+
+    ```bash
+    sudo nano /etc/rc.local
+    ```
+
+1. Go down to the end of the file and add the following line just before the final line `exit 0`:
+
+    ```
+    python3 /home/pi/tweeting-babbage/babbage.py &
+    ```
+
+    This runs the script when the Pi boots. The ampersand (&) is important as it makes the script run in a separate process so that the Pi can continue to boot.
+
+1. Save and exit with `Ctrl + O`, `Enter` and `Ctrl + X`.
+
+1. Reboot the Pi without a monitor and wait for it to boot (the activity light on the Pi should stop flashing). Try pressing the button and watching it upload the picture to Twitter.
+
+    If you have issues, try reconnecting a monitor to see what's going on.
+
 ## Tweeting Babbage
 
 Now we have the code doing exactly what we want, let's put it in to action (or in to Babbage, to be more precise).
+
+1. Take a fresh Babbage, and make an incision in its rear end with scissors. Cut all across the bottom from the thighs, a little more than the width of the Pi.
+
+    ![](images/babbage-incision.png)
+
+    731, 736, 739
+
+1. Remove as much stuffing from the body as possible. Remove it from the head, body and right arm but leave the left and and both legs.
+
+    ![](images/babbage-stuffing-removal.png)
+
+1. Insert the button with wires attached in to the bear, placing the button inside the paw, and leaving the wire trailing out. There's no need to have it attached to the Pi yet.
+
+1. Replace the arm struffing to keep the button in place.
+
+1. Cut out the right eye with scissors. Try not to remove any fabric, just loosen the eye from the socket and remove it.
+
+    ![](images/babbage-eye-removal.png)
+
+    756, 765, 769
+
+1. Insert the camera module, unattached, in to the bear, cxarefully positioning the camera lens pointing out of the eye hole.
+
+    ![](images/babbage-camera-insertion.png)
+
+    775, 784
+
+1. Replace the head stuffing behind the camera module to keep it in place.
+
+1. Connect the camera module to the Pi and wire up the push button to the pins used earlier: Ground and GPIO 14. Also connect the Pi's power cable.
+
+    ![](images/babbage-pi-connections.png)
+
+    788, 795
+
+    ![](images/babbage-pi-connections2.png)
+
+    800, 802
+
+1. With the power, camera and GPIO button connected to the Pi, carefully insert the Pi in to the bear SD card slot first, with the USB ports facing up at the bottom end.
+
+    ![](images/babbage-pi-insertion.png)
+
+    803, 805
+
+1. Replace stuffing in to the body to pad it out.
+
+    ![](images/babbage-pi-stuffing.png)
+
+    813, 816
+
+1. Connect the Ethernet cable or pre-configured USB WiFi dongle.
+
+    ![](images/babbage-ethernet.png)
+
+1. Use safety pins to seal the incision wound over the USB ports.
+
+    ![](images/babbage-ethernet.png)
+
+1. Connect the Pi's power supply to a wall socket and wait for it to boot. Once it's ready, every time you press the button it will take a picture and tweet it!
