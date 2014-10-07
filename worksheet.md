@@ -512,6 +512,6 @@ Now we have the code doing exactly what we want, let's put it in to action (or i
 
 1. Use safety pins to seal the incision wound over the USB ports.
 
-    ![](images/babbage-ethernet.png)
+    ![](images/babbage-safety-pins.png)
 
 1. Connect the Pi's power supply to a wall socket and wait for it to boot. Once it's ready, every time you press the button it will take a picture and tweet it!
