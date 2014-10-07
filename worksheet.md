@@ -472,7 +472,7 @@ Now we have the code doing exactly what we want, let's put it in to action (or i
 
     ![](images/babbage-eye-removal.jpg)
 
-1. Insert the camera module, unattached, in to the bear, cxarefully positioning the camera lens pointing out of the eye hole.
+1. Insert the camera module, unattached, in to the bear, carefully positioning the camera lens pointing out of the eye hole.
 
     ![](images/babbage-camera-insertion.jpg)
 
