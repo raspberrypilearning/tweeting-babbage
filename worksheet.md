@@ -271,20 +271,20 @@ Now let's fix the hard-coded filename of `image.jpg` and use something more dyna
 
 1. Save the timestamp as a variable before taking the picture and pass this in to the path string:
 
-```python
-timestamp = datetime.now().isoformat()
-photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
-camera.capture(photo_path)
-```
+    ```python
+    timestamp = datetime.now().isoformat()
+    photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+    camera.capture(photo_path)
+    ```
 
     The timestamp is formatted like `2014-10-02T05:10:25.642155`.
 
 1. Also change the `update_status_with_media()` call with this new photo path:
 
-```python
-with open(photo_path, 'rb') as photo:
-    twitter.update_status_with_media(status=message, media=photo)
-```
+    ```python
+    with open(photo_path, 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
+    ```
 
 1. Run the code again and it should save the image in the `tweeting-babbage/photos` folder and tweet it as usual.
 
@@ -458,60 +458,50 @@ Now we have the code doing exactly what we want, let's put it in to action (or i
 
 1. Take a fresh Babbage, and make an incision in its rear end with scissors. Cut all across the bottom from the thighs, a little more than the width of the Pi.
 
-    ![](images/babbage-incision.png)
-
-    731, 736, 739
+    ![](images/babbage-incision.jpg)
 
 1. Remove as much stuffing from the body as possible. Remove it from the head, body and right arm but leave the left and and both legs.
 
-    ![](images/babbage-stuffing-removal.png)
+    ![](images/babbage-stuffing-removal.jpg)
 
 1. Insert the button with wires attached in to the bear, placing the button inside the paw, and leaving the wire trailing out. There's no need to have it attached to the Pi yet.
 
-1. Replace the arm struffing to keep the button in place.
+1. Replace the arm stuffing to keep the button in place.
 
 1. Cut out the right eye with scissors. Try not to remove any fabric, just loosen the eye from the socket and remove it.
 
-    ![](images/babbage-eye-removal.png)
-
-    756, 765, 769
+    ![](images/babbage-eye-removal.jpg)
 
 1. Insert the camera module, unattached, in to the bear, cxarefully positioning the camera lens pointing out of the eye hole.
 
-    ![](images/babbage-camera-insertion.png)
-
-    775, 784
+    ![](images/babbage-camera-insertion.jpg)
 
 1. Replace the head stuffing behind the camera module to keep it in place.
 
 1. Connect the camera module to the Pi and wire up the push button to the pins used earlier: Ground and GPIO 14. Also connect the Pi's power cable.
 
-    ![](images/babbage-pi-connections.png)
+    ![](images/babbage-pi-connections.jpg)
 
-    788, 795
-
-    ![](images/babbage-pi-connections2.png)
-
-    800, 802
+    ![](images/babbage-pi-connections2.jpg)
 
 1. With the power, camera and GPIO button connected to the Pi, carefully insert the Pi in to the bear SD card slot first, with the USB ports facing up at the bottom end.
 
-    ![](images/babbage-pi-insertion.png)
-
-    803, 805
+    ![](images/babbage-pi-insertion.jpg)
 
 1. Replace stuffing in to the body to pad it out.
 
-    ![](images/babbage-pi-stuffing.png)
-
-    813, 816
+    ![](images/babbage-pi-stuffing.jpg)
 
 1. Connect the Ethernet cable or pre-configured USB WiFi dongle.
 
-    ![](images/babbage-ethernet.png)
+    ![](images/babbage-ethernet.jpg)
 
 1. Use safety pins to seal the incision wound over the USB ports.
 
-    ![](images/babbage-safety-pins.png)
+    ![](images/babbage-safety-pins.jpg)
 
-1. Connect the Pi's power supply to a wall socket and wait for it to boot. Once it's ready, every time you press the button it will take a picture and tweet it!
+1. Connect the Pi's power supply to a wall socket and wait for it to boot. Once it's ready, every time you press the button in the paw it will take a picture and tweet it!
+
+Now you have a Tweeting Babbage!
+
+![](images/tweeting-babbage.jpg)

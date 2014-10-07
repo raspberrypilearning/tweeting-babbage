@@ -2,6 +2,8 @@
 
 Make a Babbage Bear that takes photos and sends tweets!
 
+![](images/tweeting-babbage.jpg)
+
 ## Requirements
 
 As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need:
