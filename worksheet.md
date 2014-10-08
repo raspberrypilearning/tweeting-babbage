@@ -151,10 +151,10 @@ If you see an error, your API keys may be incorrect. Be sure to copy them exactl
 
 Now that we can send some text as a tweet, let's mix it up a bit.
 
-1. First, import the random choice function:
+1. First, import the random module:
 
     ```python
-    import random.choice
+    import random
     ```
 
     This function takes a list and returns a single entry at random.
@@ -174,6 +174,8 @@ Now that we can send some text as a tweet, let's mix it up a bit.
     ```
 
 1. Replace `message = "Hello world!"` with `message = random.choice(messages)`.
+    
+    This chooses a single item from the `messages` list at random.
 
 1. Run the code again two or more times to see different messages being tweeted at random.
 
@@ -378,7 +380,7 @@ from picamera import PiCamera
 from time import sleep
 from datetime import datetime
 import RPi.GPIO as GPIO
-import random.choice
+import random
 from auth import (
     consumer_key,
     consumer_secret,
