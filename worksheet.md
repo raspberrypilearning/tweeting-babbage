@@ -441,7 +441,7 @@ Lastly, we'll make the Python script run as soon as the Pi boots, as we won't ha
 1. Go down to the end of the file and add the following line just before the final line `exit 0`:
 
     ```
-    python3 /home/pi/tweeting-babbage/babbage.py &
+    sudo python3 /home/pi/tweeting-babbage/babbage.py &
     ```
 
     This runs the script when the Pi boots. The ampersand (&) is important as it makes the script run in a separate process, so that the Pi can continue to boot.
