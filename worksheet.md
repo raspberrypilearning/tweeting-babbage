@@ -277,7 +277,7 @@ Now let's fix the hard-coded filename of `image.jpg` and use something more dyna
     camera.capture(photo_path)
     ```
 
-    The timestamp is formatted like this: `2014-10-02T05:10:25.642155`.
+    The timestamp is formatted in the ISO datetime format `YYYY-MM-DDTHH:MM:SS.mmmmmm` e.g. `2014-10-02T05:10:25.642155` (year, month, day, hours, minutes, seconds, microseconds).
 
 1. Now change the `update_status_with_media()` call to this new photo path:
 
