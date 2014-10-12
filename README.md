@@ -35,8 +35,13 @@ You'll need the worksheet for the instructions and the GPIO diagram for the butt
 
 - [The worksheet](worksheet.md)
 - [GPIO diagram](images/gpio-setup.png)
-- (Optional) Final version of Python code [babbage.py](code/babbage.py)
-    - Download to the home directory with `wget http://goo.gl/????? -O babbage.py --no-check-certificate`
+- (Optional) Final version of Python code [babbage.py](code/babbage.py) and [auth.py](code/auth.py)
+    - Download to the home directory with:
+        
+        ```bash
+        wget http://goo.gl/ySSbDl -O babbage.py --no-check-certificate
+        wget http://goo.gl/msiYoo -O auth.py --no-check-certificate
+        ```
 
 ## Python 2 compatibility
 
