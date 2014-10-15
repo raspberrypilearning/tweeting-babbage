@@ -59,7 +59,7 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
 1. Enter this folder with `cd tweeting-babbage` and create the files we'll be using:
 
     ```bash
-    touch auth.py babbage.py tweeting-babbage.py
+    touch auth.py babbage.py
     ```
 
 1. Launch these Python files in `IDLE3` with root permissions (you'll need this for the GPIO) with the command:
