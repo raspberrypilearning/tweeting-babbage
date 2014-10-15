@@ -157,7 +157,7 @@ Now that we can send some text as a tweet, let's mix it up a bit.
     import random
     ```
 
-    This function takes a list and returns a single entry at random.
+    This module contains a `choice` function which takes a list and returns a single entry at random.
 
 1. Now create a list of messages like so:
 
