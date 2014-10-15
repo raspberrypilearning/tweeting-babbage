@@ -34,7 +34,7 @@ See more information on checking you have these packages installed, and how to i
 You'll need the worksheet for the instructions and the GPIO diagram for the button setup. Optionally, you can download the final version of the code to save typing it out.
 
 - [The worksheet](worksheet.md)
-- [GPIO diagram](images/gpio-setup.png)
+- [GPIO diagram](images/gpio-diagram.png)
 - (Optional) Final version of Python code [babbage.py](code/babbage.py) and [auth.py](code/auth.py)
     - Download to the home directory with:
         
