@@ -267,7 +267,7 @@ Now we'll copy the `picamera` code we just used into the `babbage.py` file, so t
 
 Now let's fix the hard-coded filename of `image.jpg` and use something more dynamic. It would be better to timestamp the filename so it will never get overwritten. It should also be stored in a folder inside our project.
 
-1. In the terminal window, create a new folder inside `twitter-babbage` called `photos` with `mkdir photos`.
+1. In the terminal window, create a new folder inside `tweeting-babbage` called `photos` with `mkdir photos`.
 
 1. Import the `datetime` function with `from datetime import datetime`.
 
