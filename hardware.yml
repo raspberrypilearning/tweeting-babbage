@@ -1,0 +1,9 @@
+- name: Raspberry Pi camera module
+  img: camera
+  url: http://www.raspberrypi.org/products/camera-module/
+- name: Set of Quick-Connect Wires
+  img: quick-connect-wires
+  url: https://www.modmypi.com/raspberry-pi-hacking/buttons-and-switchs/arcade-button-quick-connect-wires
+- name: Tactile button
+  img: tactile-button
+  url: http://uk.rs-online.com/web/p/tactile-switches/7182443/
