@@ -1,6 +1,8 @@
 # Software installation
 
-You'll need to make sure you have the following packages installed to proceed with the worksheet.
+You'll need to make sure you have the following packages installed to proceed with the worksheet:
+
+- Twython for Python 3
 
 You'll need to be online to install packages.
 
@@ -14,14 +16,14 @@ sudo apt-get upgrade
 Now install the packages you'll need:
 
 ```bash
-sudo apt-get install python3-picamera python3-pip
+sudo apt-get install python3-pip
 sudo pip-3.2 install twython
 ```
 
 Test you have everything you need by entering the following command:
 
 ```bash
-python3 -c "import picamera, twython"
+python3 -c "import twython"
 ```
 
-This should bring you back to the command prompt with no errors. If you get an error saying `No module named picamera` then check you entered the commands above correctly.
+This should bring you back to the command prompt with no errors. If you get an error saying `No module named twython` then check you entered the commands above correctly.
