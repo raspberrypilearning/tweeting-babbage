@@ -3,7 +3,7 @@ from picamera import PiCamera
 from time import sleep
 from datetime import datetime
 import RPi.GPIO as GPIO
-import random.choice
+import random
 from auth import (
     consumer_key,
     consumer_secret,
