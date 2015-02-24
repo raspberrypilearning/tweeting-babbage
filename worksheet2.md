@@ -172,3 +172,10 @@ Now that we have the code doing exactly what we want, let's put it into action (
 Now you have a Tweeting Babbage!
 
 ![](images/tweeting-babbage.jpg)
+
+## What next?
+
+- Try adding a text or image overlay to the picture before tweeting! See the [picamera documentation](http://picamera.readthedocs.org/)
+- What else could you use as a trigger instead of a push button? How about a sensor? Or when someone tweets a particular hashtag?
+- What else could you use as the output? You could upload to another website using a different API or display on a screen somewhere
+- Try making two Babbages tweet to each other in conversation!
