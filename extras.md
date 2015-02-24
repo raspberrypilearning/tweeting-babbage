@@ -1,3 +1,5 @@
+You'll also need:
+
 - Babbage Bear
 - Scissors
 - Pliers
