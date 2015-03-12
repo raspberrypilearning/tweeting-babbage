@@ -2,7 +2,7 @@
 
 Make a Babbage Bear that takes photos and sends tweets!
 
-![](images/tweeting-babbage.jpg)
+![](cover.png)
 
 ## Requirements
 
