@@ -3,4 +3,7 @@
   url: http://www.raspberrypi.org/products/camera-module/
 - name: 1 x set of Quick-Connect Wires
   img: quick-connect-wires
-  url: https://www.modmypi.com/raspberry-pi-hacking/buttons-and-switchs/arcade-button-quick-connect-wires
+  url: http://www.modmypi.com/raspberry-pi/hacking-and-prototyping/buttons-and-switches/arcade-button-quick-connect-wires-set-of-10-pairs
+- name: 1 x Tactile Push Button
+  img: tactile-push-button
+  url: http://www.modmypi.com/raspberry-pi/hacking-and-prototyping/buttons-and-switches/colorful-tactile-button-switch-assortment-round-15-pack
