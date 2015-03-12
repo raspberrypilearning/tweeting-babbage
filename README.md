@@ -12,12 +12,11 @@ As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need
 
 - 1 x [Raspberry Pi camera module](http://www.raspberrypi.org/product/camera-module/)
 - 1 x Set of Quick-Connect Wires (e.g. from [ModMyPi](https://www.modmypi.com/raspberry-pi-hacking/buttons-and-switchs/arcade-button-quick-connect-wires))
-- 1 x Tactile button (e.g. from [RS Components](http://uk.rs-online.com/web/p/tactile-switches/7182443/))
+- 1 x Tactile button (e.g. from [ModMyPi Components](http://www.modmypi.com/raspberry-pi/hacking-and-prototyping/buttons-and-switches/colorful-tactile-button-switch-assortment-round-15-pack))
 
 ### Software
 
-- python3-picamera
-- python3-twython
+- Twython for Python 3
 
 See more information on checking you have these packages installed, and how to install them, on the [software installation](software.md) page.
 
