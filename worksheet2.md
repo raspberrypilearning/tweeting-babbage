@@ -1,4 +1,4 @@
-# Tweeting Babbage
+# Tweeting Babbage - Part 2
 
 Make a Babbage Bear that takes photos and sends tweets!
 
