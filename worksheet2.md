@@ -163,7 +163,7 @@ Now that we have the code doing exactly what we want, let's put it into action (
 
     ![](images/babbage-ethernet.jpg)
 
-1. Use safety pins to seal the incision wound over the USB ports.
+1. Use safety pins to close the incision over the USB ports.
 
     ![](images/babbage-safety-pins.jpg)
 
