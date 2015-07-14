@@ -127,6 +127,13 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
         access_token,
         access_token_secret
     )
+    
+    twitter = Twython(
+        consumer_key,
+        consumer_secret,
+        access_token,
+        access_token_secret
+    )
 
     def main():
         message = "Hello world!"
