@@ -50,25 +50,11 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
 
     This is important, as without the correct time we won't be able to connect to Twitter.
 
-1. Create a folder for your project with the following command:
+1. Open the File Manager and create a folder for your project, called `tweeting-babbage`.
 
-    ```bash
-    mkdir tweeting-babbage
-    ```
+1. Open Python 3 from the application menu.
 
-1. Enter this folder with `cd tweeting-babbage` and create the files we'll be using:
-
-    ```bash
-    touch auth.py babbage.py
-    ```
-
-1. Launch these Python files in `IDLE3` with root permissions (you'll need this for the GPIO) with the command:
-
-    ```
-    sudo idle3 *.py &
-    ```
-
-1. In `auth.py` paste your API keys from [apps.twitter.com](https://apps.twitter.com) into variables like so:
+1. Create a new file and paste your API keys from [apps.twitter.com](https://apps.twitter.com) into variables like so:
 
     ```python
     consumer_key        = 'ABCDEFGHIJKLKMNOPQRSTUVWXYZ'
@@ -77,7 +63,11 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
     access_token_secret = '0987654321ZYXWVUTSRQPONMLKJIHFEDCBA'
     ```
 
-1. Save `auth.py` and go to `babbage.py`. Import the `twython` library and the variables from `auth.py`:
+1. Save the file as `auth.py`.
+
+1. Create a new file and save it as `babbage.py`.
+
+1. Import the `twython` library and the variables from `auth.py`:
 
     ```python
     from twython import Twython
@@ -100,49 +90,15 @@ Before we perform surgery on Babbage and insert a camera up his rear end, let's 
     )
     ```
 
-1. Create a `main()` function which will be called when the script is run. We'll start with a basic "Hello world" tweet to test the connection works:
+1. Start with a basic "Hello world" tweet to test the connection works:
 
     ```python
-    def main():
-        message = "Hello world!"
-        twitter.update_status(status=message)
+    message = "Hello world!"
+    twitter.update_status(status=message)
+    print("Tweeted: %s" % message)
     ```
 
     This uses the API's `update_status()` function to send a tweet containing the text "Hello world!".
-
-1. We'll also add an instruction at the end to run the `main()` method when the script is called directly:
-
-    ```python
-    if __name__ == '__main__':
-        main()
-    ```
-
-    Your code should now look like this:
-
-    ```python
-    from twython import Twython
-    from auth import (
-        consumer_key,
-        consumer_secret,
-        access_token,
-        access_token_secret
-    )
-    
-    twitter = Twython(
-        consumer_key,
-        consumer_secret,
-        access_token,
-        access_token_secret
-    )
-
-    def main():
-        message = "Hello world!"
-        twitter.update_status(status=message)
-        print("Tweeted: %s" % message)
-
-    if __name__ == '__main__':
-        main()
-    ```
 
 1. Now save (`Ctrl + S`) and run with `F5`. You should see the message "Tweeted: Hello world!". Go to your Twitter profile in a web browser to verify it was sent! This will be at `twitter.com/username`, where `username` is your Twitter account's username.
 
@@ -180,9 +136,7 @@ Now that we can send some text as a tweet, let's mix it up a bit.
     ]
     ```
 
-1. Replace `message = "Hello world!"` with `message = random.choice(messages)`.
-
-    This chooses a single item from the `messages` list at random.
+1. Replace `message = "Hello world!"` with `message = random.choice(messages)`. This chooses a single item from the `messages` list at random.
 
 1. Run the code again two or more times to see different messages being tweeted at random.
 
@@ -190,9 +144,9 @@ Now that we can send some text as a tweet, let's mix it up a bit.
 
 Now that the Twitter connection has been tested, let's try to upload a picture. Rather than try to hook up the camera now, we'll test it independently.
 
-1. Find a picture, copy it to your Raspberry Pi or download it from the internet, and save it to your home folder. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
+1. Find a picture, copy it to your Raspberry Pi or download it from the internet, and save it. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
 
-1. Modify the `main()` function in the code accordingly:
+1. Modify the code accordingly:
 
     ```python
     message = "Hello world - here's a picture!"
@@ -216,26 +170,24 @@ Now that we know we can upload a given picture to Twitter, let's take one with t
 
     ![](images/connect-camera.jpg)
 
-1. Boot the Pi and from the command line or LXTerminal test that it works with the command `raspistill -k`. If you see the camera's image on the screen, you know it's working. Press `Ctrl + C` to exit the preview.
-
-1. Now open a new Python window in IDLE3, save as `camera.py` and enter the following code:
+1. Now open a new Python window in IDLE, save as `camera.py` and enter the following code:
 
     ```python
     from picamera import PiCamera
     from time import sleep
 
-    with PiCamera() as camera:
-        camera.start_preview()
-        sleep(3)
-        camera.capture('/home/pi/image.jpg')
-        camera.stop_preview()
+    camera = PiCamera()
+    camera.start_preview()
+    sleep(3)
+    camera.capture('/home/pi/image.jpg')
+    camera.stop_preview()
     ```
 
     This is a test script to check we can take a picture from Python.
 
 1. Run with `F5` and you should see a preview on the screen for 3 seconds before the camera takes the picture.
 
-1. Open the file manager and you should see `image.jpg`. Double-click the icon to open it up.
+1. Open the File Manager and you should see `image.jpg`. Double-click the icon to open it up.
 
 ## Tweet a picture from the Pi camera
 
@@ -253,15 +205,15 @@ Now we'll copy the `picamera` code we just used into the `babbage.py` file, so t
 1. Then add the `picamera` lines in the `main()` method:
 
     ```python
-    with PiCamera() as camera:
-        camera.start_preview()
-        sleep(3)
-        camera.capture('/home/pi/image.jpg')
-        camera.stop_preview()
+    camera = PiCamera()
+    camera.start_preview()
+    sleep(3)
+    camera.capture('/home/pi/image.jpg')
+    camera.stop_preview()
 
-        message = "Here's a Pi camera picture!"
-        with open('/home/pi/image.jpg', 'rb') as photo:
-            twitter.update_status_with_media(status=message, media=photo)
+    message = "Here's a Pi camera picture!"
+    with open('/home/pi/image.jpg', 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
     ```
 
 1. Now run the code; it will save the photo to `image.jpg` in the home folder and upload it to Twitter.
@@ -313,30 +265,27 @@ Now we'll add a hardware button that we'll use to trigger the camera.
 
     ![](images/gpio-diagram.png)
 
-1. Return to the `camera.py` script to test it out. First import the GPIO library at the top:
+1. Return to the `camera.py` script to test it out. First import the Button interface from the GPIO Zero library at the top:
 
     ```python
-    import RPi.GPIO as GPIO
+    from gpiozero import Button
     ```
 
-1. Then add some lines between the imports and the main code to set up the GPIO pins:
+1. Then add a line to create a `Button` object in your code:
 
     ```python
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(14, GPIO.IN, GPIO.PUD_UP)
+    button = Button(14)
     ```
 
-    This configures the code to use the Broadcom (`BCM`) pin numbering system (as opposed to `BOARD`). and sets up GPIO pin 14 as an input.
-
-1. Now just add the button press trigger before taking the picture. It should go between `start_preview()` and `capture()` - you can remove the `sleep()` for now:
+1. Now just add a `wait_for_press` before taking the picture. It should go between `start_preview()` and `capture()` - you can remove the `sleep()` for now:
 
     ```python
     camera.start_preview()
-    GPIO.wait_for_edge(14, GPIO.FALLING)
+    button.wait_for_press()
     camera.capture(photo_path)
     ```
 
-    `GPIO.wait_for_edge()` is the trigger; it means "wait for an input on pin 14". The code will pause on that line until it receives a button press.
+    The code will pause on that line until the button is pressed.
 
     ![](images/gpio-camera-setup.jpg)
 

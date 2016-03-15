@@ -8,7 +8,7 @@ Now that we've got the button triggering the camera, and we know we can tweet pi
 
 1. Add the GPIO library import and GPIO setup lines to the top.
 
-1. Add the `wait_for_edge()` line before the capture. You probably want to leave the `sleep()` in this time.
+1. Add the `wait_for_press()` line before the capture. You probably want to leave the `sleep()` in this time.
 
 1. Press the button when the preview appears, and it should tweet the picture from the camera.
 
@@ -21,16 +21,15 @@ Next we'll add a loop so a picture is taken every time the button is pressed.
 1. Add a `while` loop to make the button press camera trigger continue indefinitely:
 
     ```python
-    with PiCamera() as camera:
-        while True:
-            GPIO.wait_for_edge(14, GPIO.FALLING)
-            timestamp = datetime.now().isoformat()
-            photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
-            sleep(3)
-            camera.capture(photo_path)
+    while True:
+        button.wait_for_press()
+        timestamp = datetime.now().isoformat()
+        photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+        sleep(3)
+        camera.capture(photo_path)
 
-            with open(photo_path, 'rb') as photo:
-                twitter.update_status_with_media(status=message, media=photo)
+        with open(photo_path, 'rb') as photo:
+            twitter.update_status_with_media(status=message, media=photo)
     ```
 
     Make sure all the code is indented to be inside the `while` loop.
@@ -44,7 +43,7 @@ from twython import Twython
 from picamera import PiCamera
 from time import sleep
 from datetime import datetime
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import random
 from auth import (
     consumer_key,
@@ -53,15 +52,15 @@ from auth import (
     access_token_secret
 )
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(14, GPIO.IN, GPIO.PUD_UP)
-
 twitter = Twython(
     consumer_key,
     consumer_secret,
     access_token,
     access_token_secret
 )
+
+button = Button(14)
+camera = PiCamera()
 
 messages = [
     "Hello world",
@@ -73,47 +72,39 @@ messages = [
     "Get a hair cut!",
 ]
 
-def main():
-    message = random.choice(messages)
+while True:
+    button.wait_for_press()
+    timestamp = datetime.now().isoformat()
+    photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+    sleep(3)
+    camera.capture(photo_path)
 
-    with PiCamera() as camera:
-        while True:
-            GPIO.wait_for_edge(14, GPIO.FALLING)
-            timestamp = datetime.now().isoformat()
-            photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
-            sleep(3)
-            camera.capture(photo_path)
+    with open(photo_path, 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
 
-            with open(photo_path, 'rb') as photo:
-                twitter.update_status_with_media(status=message, media=photo)
-
-if __name__ == '__main__':
-    main()
 ```
 
 But feel free to make any modifications you see fit!
 
-Test that it works by navigating to the `tweeting-babbage` folder in the terminal with `cd` and running `sudo python3 babbage.py`. Press `Ctrl + C` to exit.
+Run the code again to test!
 
 ## Automation
 
 Lastly, we'll make the Python script run as soon as the Pi boots, as we won't have a monitor attached.
 
-1. Open the `rc.local` file for editing from the command line:
+1. Open the Scheduled Tasks application from the main menu.
 
-    ```bash
-    sudo nano /etc/rc.local
-    ```
+1. Create a new scheduled task:
 
-1. Go down to the end of the file and add the following line just before the final line `exit 0`:
+    - Click **New** and select **A task that launches recurrently**.
+    - Enter the **Description** as `Greenhouse Indicator`
+    - Enter the **Command** as `python3 /home/pi/tweeting-babbage/babbage.py &`
+        - **The `&` on the end of this command is important!**
+    - Select **At reboot** under **Basic**
+    - Click **Add** and then **OK**
+    - **Exit** the Scheduled tasks window
 
-    ```
-    python3 /home/pi/tweeting-babbage/babbage.py &
-    ```
-
-    This runs the script when the Pi boots. The ampersand (&) is important as it makes the script run in a separate process, so that the Pi can continue to boot.
-
-1. Save and exit with `Ctrl + O`, `Enter` and `Ctrl + X`.
+    *Now your Pi is programmed to run the program on boot.*
 
 1. Reboot the Pi without a monitor and wait for it to boot (the activity light on the Pi should stop flashing). Try pressing the button and watching it upload the picture to Twitter.
 

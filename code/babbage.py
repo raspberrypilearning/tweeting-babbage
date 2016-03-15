@@ -2,7 +2,7 @@ from twython import Twython
 from picamera import PiCamera
 from time import sleep
 from datetime import datetime
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import random
 from auth import (
     consumer_key,
@@ -11,15 +11,15 @@ from auth import (
     access_token_secret
 )
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(14, GPIO.IN, GPIO.PUD_UP)
-
 twitter = Twython(
     consumer_key,
     consumer_secret,
     access_token,
     access_token_secret
 )
+
+button = Button(14)
+camera = PiCamera()
 
 messages = [
     "Hello world",
@@ -31,19 +31,12 @@ messages = [
     "Get a hair cut!",
 ]
 
-def main():
-    message = random.choice(messages)
+while True:
+    button.wait_for_press()
+    timestamp = datetime.now().isoformat()
+    photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+    sleep(3)
+    camera.capture(photo_path)
 
-    with PiCamera() as camera:
-        while True:
-            GPIO.wait_for_edge(14, GPIO.FALLING)
-            timestamp = datetime.now().isoformat()
-            photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
-            sleep(3)
-            camera.capture(photo_path)
-
-            with open(photo_path, 'rb') as photo:
-                twitter.update_status_with_media(status=message, media=photo)
-
-if __name__ == '__main__':
-    main()
+    with open(photo_path, 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
