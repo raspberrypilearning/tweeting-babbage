@@ -23,6 +23,7 @@ Next we'll add a loop so a picture is taken every time the button is pressed.
     ```python
     while True:
         button.wait_for_press()
+        message = random.choice(messages)
         timestamp = datetime.now().isoformat()
         photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
         sleep(3)
@@ -74,6 +75,7 @@ messages = [
 
 while True:
     button.wait_for_press()
+    message = random.choice(messages)
     timestamp = datetime.now().isoformat()
     photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
     sleep(3)
@@ -97,7 +99,7 @@ Lastly, we'll make the Python script run as soon as the Pi boots, as we won't ha
 1. Create a new scheduled task:
 
     - Click **New** and select **A task that launches recurrently**.
-    - Enter the **Description** as `Greenhouse Indicator`
+    - Enter the **Description** as `Tweeting Babbage`
     - Enter the **Command** as `python3 /home/pi/tweeting-babbage/babbage.py &`
         - **The `&` on the end of this command is important!**
     - Select **At reboot** under **Basic**

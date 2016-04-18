@@ -33,6 +33,7 @@ messages = [
 
 while True:
     button.wait_for_press()
+    message = random.choice(message)
     timestamp = datetime.now().isoformat()
     photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
     sleep(3)
