@@ -202,7 +202,7 @@ Now we'll copy the `picamera` code we just used into the `babbage.py` file, so t
 
     Imports are best kept at the top of the code before anything else.
 
-1. Then add the `picamera` lines in the `main()` method:
+1. Then add the `picamera` lines:
 
     ```python
     camera = PiCamera()
