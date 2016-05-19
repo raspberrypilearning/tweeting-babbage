@@ -40,7 +40,7 @@ We need to register our application with Twitter to get keys; these allow us to 
 
 Before we perform surgery on Babbage and insert a camera up his rear end, let's get the code doing what we want.
 
-1. Boot your Raspberry Pi to the desktop and launch `LXTerminal`.
+1. Boot your Raspberry Pi and open a Terminal window.
 
 1. Because the Raspberry Pi doesn't have a real-time clock, we must start by setting the correct date and time on the system with the command:
 
