@@ -2,188 +2,37 @@
 
 Make a Babbage Bear that takes photos and sends tweets!
 
-## Create a Twitter account
+First of all, you'll need to set up a Twitter account, get your API keys and test the connection. Follow the [Getting Started with the Twitter API](https://www.raspberrypi.org/learning/getting-started-with-the-twitter-api/) resource before you start. If you're unfamiliar with the camera module, it's worth working through [Getting Started with Picamera](https://www.raspberrypi.org/learning/getting-started-with-picamera/).
 
-First we need to create a Twitter account to use for the project.
+## Take a picture with the camera module
 
-1. Create a Twitter account for your Babbage Bear at [twitter.com](https://twitter.com).
-
-    ![](images/create-twitter.png)
-
-You might also want to upload a photo and fill out the bio.
-
-## Create a Twitter application
-
-We need to register our application with Twitter to get keys; these allow us to access the Twitter account from Python using the Twitter API (Application Programming Interface).
-
-1. Go to [apps.twitter.com](https://apps.twitter.com) and click the **Create New App** button.
-
-    ![](images/create-new-app.png)
-
-1. Complete the application details form. You must enter an application name, description, and website (this can be `http://www.raspberrypi.org` if you don't have one). Leave the Callback URL field blank and proceed.
-
-    ![](images/app-details.png)
-
-1. Modify your app permissions from **Read only** to **Read and write**.
-
-    ![](images/read-and-write.png)
-
-1. Click the 'Keys and Access Tokens' tab and create an access token.
-
-1. Once you've clicked the **Create an Access Token** button, refresh the page and you'll see a new section beneath the **Application Settings** with your access token details.
-
-1. You should now be able to see your **Consumer key**, **Consumer secret**, **Access token**, and **Access token secret**. You'll need these four keys to connect to your Twitter account from your Python code. Don't share these keys with anyone as they can be used without the account's password. If you share your code online, make sure not to include these keys. If you ever accidentally share or publish these keys, you should regenerate the keys at [apps.twitter.com](https://apps.twitter.com).
-
-![](images/twitter-keys.png)
-
-## Connect to Twitter from Python
-
-Before we perform surgery on Babbage and insert a camera up his rear end, let's get the code doing what we want.
-
-1. Boot your Raspberry Pi and open a Terminal window.
-
-1. Because the Raspberry Pi doesn't have a real-time clock, we must start by setting the correct date and time on the system with the command:
-
-    ```bash
-    sudo date -s "2 OCT 2014 12:00:00"
-    ```
-
-    This is important, as without the correct time we won't be able to connect to Twitter.
-
-1. Open the File Manager and create a folder for your project, called `tweeting-babbage`.
-
-1. Open Python 3 from the application menu.
-
-1. Create a new file and paste your API keys from [apps.twitter.com](https://apps.twitter.com) into variables like so:
-
-    ```python
-    consumer_key        = 'ABCDEFGHIJKLKMNOPQRSTUVWXYZ'
-    consumer_secret     = '1234567890ABCDEFGHIJKLMNOPQRSTUVXYZ'
-    access_token        = 'ZYXWVUTSRQPONMLKJIHFEDCBA'
-    access_token_secret = '0987654321ZYXWVUTSRQPONMLKJIHFEDCBA'
-    ```
-
-1. Save the file as `auth.py`.
-
-1. Create a new file and save it as `babbage.py`.
-
-1. Import the `twython` library and the variables from `auth.py`:
-
-    ```python
-    from twython import Twython
-    from auth import (
-        consumer_key,
-        consumer_secret,
-        access_token,
-        access_token_secret
-    )
-    ```
-
-1. Make a connection with the Twitter API using this set of keys:
-
-    ```python
-    twitter = Twython(
-        consumer_key,
-        consumer_secret,
-        access_token,
-        access_token_secret
-    )
-    ```
-
-1. Start with a basic "Hello world" tweet to test the connection works:
-
-    ```python
-    message = "Hello world!"
-    twitter.update_status(status=message)
-    print("Tweeted: %s" % message)
-    ```
-
-    This uses the API's `update_status()` function to send a tweet containing the text "Hello world!".
-
-1. Now save (`Ctrl + S`) and run with `F5`. You should see the message "Tweeted: Hello world!". Go to your Twitter profile in a web browser to verify it was sent! This will be at `twitter.com/username`, where `username` is your Twitter account's username.
-
-![](images/twitter-hello-world.png)
-
-Note that sending multiple tweets with the exact same text are classed as duplicates and rejected by Twitter. If you want to test it again, try tweeting a different message.
-
-If you see an error, your API keys may be incorrect. Be sure to copy them exactly and check the spelling of the variables. You should also check that your Pi is online.
-
-![](images/twitter-api-error.png)
-
-## Tweet random messages
-
-Now that we can send some text as a tweet, let's mix it up a bit.
-
-1. First, import the random module:
-
-    ```python
-    import random
-    ```
-
-    This module contains a `choice` function which takes a list and returns a single entry at random.
-
-1. Now create a list of messages like so:
-
-    ```python
-    messages = [
-        "Hello world",
-        "Hi there",
-        "My name is Babbage",
-        "What's up?",
-        "How's it going?",
-        "Have you been here before?",
-        "Get a hair cut!",
-    ]
-    ```
-
-1. Replace `message = "Hello world!"` with `message = random.choice(messages)`. This chooses a single item from the `messages` list at random.
-
-1. Run the code again two or more times to see different messages being tweeted at random.
-
-## Tweet a picture
-
-Now that the Twitter connection has been tested, let's try to upload a picture. Rather than try to hook up the camera now, we'll test it independently.
-
-1. Find a picture, copy it to your Raspberry Pi or download it from the internet, and save it. Make a note of its location (something like `/home/pi/Downloads/image.jpg`).
-
-1. Modify the code accordingly:
-
-    ```python
-    message = "Hello world - here's a picture!"
-    with open('/home/pi/Downloads/image.jpg', 'rb') as photo:
-        twitter.update_status_with_media(status=message, media=photo)
-    ```
-
-    Make sure to specify the full path to the image correctly.
-
-    This opens the file and uses the `update_status_with_media()` function to upload the image, along with the tweet text.
-
-1. Run the code and see if it tweets the text and image together!
-
-    ![](images/tweet-image.png)
-
-## Take a picture with the Pi camera
-
-Now that we know we can upload a given picture to Twitter, let's take one with the Pi camera.
+First, you'll need to set up your camera and write the code to take a picture.
 
 1. With the Pi switched off, connect the camera to the camera port.
 
-    ![](images/connect-camera.jpg)
+    ![Connect the camera](images/connect-camera.jpg)
 
-1. Now open a new Python window in IDLE, save as `camera.py` and enter the following code:
+1. Open the **File Manager** and create a new folder for your project, e.g. `tweeting-babbage`.
+
+1. Open **Python 3 (IDLE)** from the main menu:
+
+    ![](images/python3.png)
+
+1. Now open a new window, save it as `camera.py` and enter the following code:
 
     ```python
     from picamera import PiCamera
     from time import sleep
 
     camera = PiCamera()
+
     camera.start_preview()
     sleep(3)
     camera.capture('/home/pi/image.jpg')
     camera.stop_preview()
     ```
 
-    This is a test script to check we can take a picture from Python.
+    This is a test script to check you can take a picture from Python.
 
 1. Run with `F5` and you should see a preview on the screen for 3 seconds before the camera takes the picture.
 
@@ -191,7 +40,7 @@ Now that we know we can upload a given picture to Twitter, let's take one with t
 
 ## Tweet a picture from the Pi camera
 
-Now we'll copy the `picamera` code we just used into the `babbage.py` file, so that it will tweet the photo taken by the Pi camera.
+Now you'll need to copy the picamera code you just used into the `babbage.py` file, so that it will tweet the photo taken by the Pi camera.
 
 1. First add the `import` lines at the top:
 
@@ -206,6 +55,7 @@ Now we'll copy the `picamera` code we just used into the `babbage.py` file, so t
 
     ```python
     camera = PiCamera()
+
     camera.start_preview()
     sleep(3)
     camera.capture('/home/pi/image.jpg')
@@ -224,11 +74,11 @@ Now we'll copy the `picamera` code we just used into the `babbage.py` file, so t
 
 ## Use a timestamp
 
-Now let's fix the hard-coded filename of `image.jpg` and use something more dynamic. It would be better to timestamp the filename so it will never get overwritten. It should also be stored in a folder inside our project.
+Rather than use the hard-coded filename of `image.jpg`, you can use something more dynamic. It would be better to timestamp the filename so it will never get overwritten. It should also be stored in a folder inside your project.
 
-1. In the terminal window, create a new folder inside `tweeting-babbage` called `photos` with `mkdir photos`.
+1. In the File Manager, create a new folder inside `tweeting-babbage` called `photos`.
 
-1. Import the `datetime` function with `from datetime import datetime`.
+1. Import the `datetime` module by adding the line `from datetime import datetime` to the top of your script.
 
 1. Save the timestamp as a variable before taking the picture, and pass this into the path string:
 
@@ -251,7 +101,7 @@ Now let's fix the hard-coded filename of `image.jpg` and use something more dyna
 
 ## Wire up a GPIO button
 
-Now we'll add a hardware button that we'll use to trigger the camera.
+Now you'll add a hardware button that you'll use to trigger the camera.
 
 1. Connect the button to the wires and attach it by clamping with a pair of pliers.
 
@@ -293,6 +143,196 @@ Now we'll add a hardware button that we'll use to trigger the camera.
 
 If your button press has no effect, make sure it is wired up to the correct pins. If you can't get it to work, try pressing `Ctrl + C` while pressing the button to try to force an exit.
 
-## Continue
+## Put it all together
 
-[Continue with worksheet 2](worksheet2.md)
+Now that you've got the button triggering the camera, and you know you can tweet pictures taken with the camera, put it all together in `babbage.py`.
+
+1. Add the GPIO library import and GPIO setup lines to the top.
+
+1. Add the `wait_for_press()` line before the capture. You probably want to leave the `sleep()` in this time.
+
+1. Press the button when the preview appears, and it should tweet the picture from the camera.
+
+## Add continuation
+
+Next we'll add a loop so a picture is taken every time the button is pressed.
+
+1. Remove the preview from the code as you won't have a screen attached. Remove the `start_preview()` and `stop_preview()` lines as well.
+
+1. Add a `while` loop to make the button press camera trigger continue indefinitely:
+
+    ```python
+    while True:
+        button.wait_for_press()
+        message = random.choice(messages)
+        timestamp = datetime.now().isoformat()
+        photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+        sleep(3)
+        camera.capture(photo_path)
+
+        with open(photo_path, 'rb') as photo:
+            twitter.update_status_with_media(status=message, media=photo)
+    ```
+
+    Make sure all the code is indented to be inside the `while` loop.
+
+## Final code
+
+Your final code should look something like this:
+
+```python
+from twython import Twython
+from picamera import PiCamera
+from time import sleep
+from datetime import datetime
+from gpiozero import Button
+import random
+from auth import (
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
+)
+
+twitter = Twython(
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
+)
+
+button = Button(14)
+camera = PiCamera()
+
+messages = [
+    "Hello world",
+    "Hi there",
+    "My name is Babbage",
+    "What's up?",
+    "How's it going?",
+    "Have you been here before?",
+    "Get a hair cut!",
+]
+
+while True:
+    button.wait_for_press()
+    message = random.choice(messages)
+    timestamp = datetime.now().isoformat()
+    photo_path = '/home/pi/tweeting-babbage/photos/%s.jpg' % timestamp
+    sleep(3)
+    camera.capture(photo_path)
+
+    with open(photo_path, 'rb') as photo:
+        twitter.update_status_with_media(status=message, media=photo)
+
+```
+
+But feel free to make any modifications you see fit!
+
+Run the code again to test!
+
+## Automation
+
+Lastly, you'll need to make the Python script run as soon as the Pi boots, as you won't have a monitor attached.
+
+1. Open the Scheduled Tasks application from the main menu.
+
+1. Create a new scheduled task:
+
+    - Click **New** and select **A task that launches recurrently**.
+    - Enter the **Description** as `Tweeting Babbage`
+    - Enter the **Command** as `python3 /home/pi/tweeting-babbage/babbage.py &`
+        - **The `&` on the end of this command is important!**
+    - Select **At reboot** under **Basic**
+    - Click **Add** and then **OK**
+    - **Exit** the Scheduled tasks window
+
+    *Now your Pi is programmed to run the program on boot.*
+
+1. Reboot the Pi without a monitor and wait for it to boot (the activity light on the Pi should stop flashing). Try pressing the button and watching it upload the picture to Twitter.
+
+    If you have any issues, try reconnecting a monitor to see what's going on.
+
+## Setting up the hardware
+
+You might want to think carefully about which Raspberry Pi model you use for the deployment. These instructions use a Model B+, which does (just) fit inside a Babbage, but a Raspberry Pi Zero, or Model A+ are smaller, lower-powered and better suited to a project like this.
+
+Other things to think about are WiFi, power and cost.
+
+### WiFi
+
+Raspberry Pi 3 comes with built-in wireless connectivity, meaning you can connect to the Internet without any wires. Other models do not have WiFi, but you can add a USB WiFi dongle. Alternatively you can use an Ethernet cable, but this restricts the portability of the project.
+
+The pictures below show the Babbage connected with an Ethernet cable.
+
+### Power
+
+Usually, the Raspberry Pi is connected to mains power (a plug socket in the wall) with a USB power supply. Alternatively, it can be powered by a USB power bank. Note that each Raspberry Pi model has a different power usage rate. The Pi 3 is the biggest power draw, and the Model A+ and Pi Zero are the lowest. You might want to do some testing to see how long each Pi lasts on a battery pack.
+
+The pictures below show the Babbage connected to mains power.
+
+### Cost
+
+While the Pi 3, Pi 2 and Model B+ are better suited to using the Pi as a desktop computer, if you intend to keep your Tweeting Babbage project running long term, you might not want to sacrifice your main Raspberry Pi. A good way to manage this is to do all your development work on your main Pi (e.g. Pi 3) and deploy to a cheaper version (e.g. Pi Zero or Model A+), which means you don't lose your main Pi, along with the power benefits this brings.
+
+## Tweeting Babbage
+
+Now that you have the code doing exactly what you want, you can put it into action (or into Babbage, to be more precise).
+
+1. Take a fresh Babbage, and make an incision in its rear end with scissors. Cut all across the bottom from the thighs, a little more than the width of the Pi.
+
+    ![](images/babbage-incision.jpg)
+
+1. Remove as much stuffing from the body as possible. Remove it from the head, body and right arm, but leave the left arm and both legs.
+
+    ![](images/babbage-stuffing-removal.jpg)
+
+1. Insert the button into the bear with wires attached, placing the button inside the paw, and leaving the wire trailing out. There's no need to have it attached to the Pi yet.
+
+1. Replace the arm stuffing to keep the button in place.
+
+1. Cut out the right eye with scissors. Try not to remove any fabric; just loosen the eye from the socket and remove it.
+
+    ![](images/babbage-eye-removal.jpg)
+
+1. Insert the camera module into the bear, unattached, carefully positioning the camera lens pointing out of the eye hole.
+
+    ![](images/babbage-camera-insertion.jpg)
+
+1. Replace the head stuffing behind the camera module to keep it in place.
+
+1. Connect the camera module to the Pi and wire up the push button to the pins used earlier: ground and GPIO 14. Now connect the Pi's power cable.
+
+    ![](images/babbage-pi-connections.jpg)
+
+    ![](images/babbage-pi-connections2.jpg)
+
+1. With the power, camera and GPIO button connected to the Pi, carefully insert the Pi into the bear SD card slot first, with the USB ports facing up at the bottom end.
+
+    ![](images/babbage-pi-insertion.jpg)
+
+1. Replace the body stuffing to pad it out.
+
+    ![](images/babbage-pi-stuffing.jpg)
+
+1. Connect the Ethernet cable or pre-configured USB WiFi dongle.
+
+    ![](images/babbage-ethernet.jpg)
+
+1. Use safety pins to close the incision over the USB ports.
+
+    ![](images/babbage-safety-pins.jpg)
+
+1. Connect the Pi's power supply to a wall socket (or connect the battery pack) and wait for it to boot. Once it's ready, every time you press the button in the paw it will take a picture and tweet it!
+
+Now you have a Tweeting Babbage!
+
+![](images/tweeting-babbage.jpg)
+
+## What next?
+
+- Try adding a text or image overlay to the picture before tweeting! See [Getting Started with Picamera](https://www.raspberrypi.org/learning/getting-started-with-picamera/) and the [picamera documentation](http://picamera.readthedocs.org/)
+- What else could you use as the input? You could use a motion sensor (or another sensor) instead of a button
+- You could use `TwythonStreamer` to take a photo when someone tweets a particular hashtag, or sends a tweet to your Babbage's Twitter account
+- What else could you use as the output? You could upload to another website using a different API or display on a screen somewhere
+- Try making two Babbages tweet to each other in conversation!

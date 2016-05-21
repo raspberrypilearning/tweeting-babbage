@@ -5,3 +5,4 @@ You'll also need:
 - Pliers
 - Safety pins
 - USB WiFi dongle (optional)
+- USB power pack (optional)
