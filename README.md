@@ -17,7 +17,8 @@ As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need
 ### Software
 
 - GPIO Zero
-- Twython
+- Twython for Python 3
+- Gnome Schedule
 
 See more information on checking you have these packages installed, and how to install them, on the [software installation](software.md) page.
 
@@ -28,20 +29,11 @@ See more information on checking you have these packages installed, and how to i
 - Pliers
 - Safety pins
 - USB WiFi dongle (optional)
+- USB power pack (optional)
 
-## Worksheet & included files
-
-You'll need the worksheet for the instructions and the GPIO diagram for the button setup. Optionally, you can download the final version of the code to save typing it out.
+## Worksheet
 
 - [The worksheet](worksheet.md)
-- [GPIO diagram](images/gpio-diagram.png)
-- (Optional) Final version of Python code [babbage.py](code/babbage.py) and [auth.py](code/auth.py)
-    - Download to the home directory with:
-
-        ```bash
-        wget http://goo.gl/ySSbDl -O babbage.py --no-check-certificate
-        wget http://goo.gl/msiYoo -O auth.py --no-check-certificate
-        ```
 
 ## Licence
 
