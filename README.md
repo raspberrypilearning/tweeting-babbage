@@ -12,7 +12,6 @@ As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need
 
 - 1 x [Raspberry Pi camera module](http://www.raspberrypi.org/product/camera-module/)
 - 1 x Set of Quick-Connect Wires (e.g. from [ModMyPi](https://www.modmypi.com/raspberry-pi-hacking/buttons-and-switchs/arcade-button-quick-connect-wires))
-- 1 x Tactile button (e.g. from [ModMyPi](http://www.modmypi.com/raspberry-pi/hacking-and-prototyping/buttons-and-switches/colorful-tactile-button-switch-assortment-round-15-pack))
 
 ### Software
 
