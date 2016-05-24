@@ -240,7 +240,7 @@ Lastly, you'll need to make the Python script run as soon as the Pi boots, as yo
     - Click **New** and select **A task that launches recurrently**.
     - Enter the **Description** as `Tweeting Babbage`
     - Enter the **Command** as `python3 /home/pi/tweeting-babbage/babbage.py &`
-        - **The `&` on the end of this command is important!**
+        - **The `&` at the end of this command is important: don't forget to include it!**
     - Select **At reboot** under **Basic**
     - Click **Add** and then **OK**
     - **Exit** the Scheduled tasks window
@@ -255,11 +255,11 @@ Lastly, you'll need to make the Python script run as soon as the Pi boots, as yo
 
 You might want to think carefully about which Raspberry Pi model you use for the deployment. These instructions use a Model B+, which does (just) fit inside a Babbage, but a Raspberry Pi Zero, or Model A+ are smaller, lower-powered and better suited to a project like this.
 
-Other things to think about are WiFi, power and cost.
+Other things to consider are WiFi, power, and cost.
 
 ### WiFi
 
-Raspberry Pi 3 comes with built-in wireless connectivity, meaning you can connect to the Internet without any wires. Other models do not have WiFi, but you can add a USB WiFi dongle. Alternatively you can use an Ethernet cable, but this restricts the portability of the project.
+Raspberry Pi 3 comes with built-in wireless connectivity, meaning you can connect to the internet without any wires. Other models do not have WiFi, but you can add a USB WiFi dongle. Alternatively you can use an Ethernet cable, but this restricts the portability of the project.
 
 The pictures below show the Babbage connected with an Ethernet cable.
 
