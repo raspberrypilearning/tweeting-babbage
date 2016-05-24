@@ -281,7 +281,7 @@ Now that you have the code doing exactly what you want, you can put it into acti
 
     ![](images/babbage-incision.jpg)
 
-1. Remove as much stuffing from the body as possible. Remove it from the head, body and right arm, but leave the left arm and both legs.
+1. Remove as much stuffing from the body as possible. Remove it from the head, body, and right arm, but leave the left arm and both legs.
 
     ![](images/babbage-stuffing-removal.jpg)
 
