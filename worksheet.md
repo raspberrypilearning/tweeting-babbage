@@ -34,7 +34,7 @@ First, you'll need to set up your camera and write the code to take a picture.
 
     This is a test script to check you can take a picture from Python.
 
-1. Run with `F5` and you should see a preview on the screen for 3 seconds before the camera takes the picture.
+1. Run with `F5` and you should see a preview on the screen for three seconds before the camera takes the picture.
 
 1. Open the File Manager and you should see `image.jpg`. Double-click the icon to open it up.
 
