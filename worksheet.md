@@ -227,9 +227,7 @@ while True:
 
 ```
 
-But feel free to make any modifications you see fit!
-
-Run the code again to test!
+But feel free to make any modifications you see fit; run the code again to check it still works fine. 
 
 ## Automation
 
@@ -247,7 +245,7 @@ Lastly, you'll need to make the Python script run as soon as the Pi boots, as yo
     - Click **Add** and then **OK**
     - **Exit** the Scheduled tasks window
 
-    *Now your Pi is programmed to run the program on boot.*
+    Now your Pi is programmed to run the program on boot.
 
 1. Reboot the Pi without a monitor and wait for it to boot (the activity light on the Pi should stop flashing). Try pressing the button and watching it upload the picture to Twitter.
 
