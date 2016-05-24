@@ -174,7 +174,7 @@ Next we'll add a loop so a picture is taken every time the button is pressed.
             twitter.update_status_with_media(status=message, media=photo)
     ```
 
-    Make sure all the code is indented to be inside the `while` loop.
+    Make sure all the code is indented so that it is inside the `while` loop.
 
 ## Final code
 
