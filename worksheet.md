@@ -227,7 +227,7 @@ while True:
 
 ```
 
-But feel free to make any modifications you see fit; run the code again to check it still works fine. 
+But feel free to make any modifications you see fit; run the code again to check it still works. 
 
 ## Automation
 
