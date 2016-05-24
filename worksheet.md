@@ -253,9 +253,9 @@ Lastly, you'll need to make the Python script run as soon as the Pi boots, as yo
 
 ## Setting up the hardware
 
-You might want to think carefully about which Raspberry Pi model you use for the deployment. These instructions use a Model B+, which does (just) fit inside a Babbage, but a Raspberry Pi Zero, or Model A+ are smaller, lower-powered and better suited to a project like this.
+You might want to think carefully about which Raspberry Pi model you use for the deployment. These instructions use a Model B+, which does (just) fit inside a Babbage, but a Raspberry Pi Zero, or Model A+ are smaller, lower-powered and may be better suited to a project like this.
 
-Other things to consider are WiFi, power, and cost.
+Other things to consider are WiFi connectivity, power, and cost.
 
 ### WiFi
 
@@ -277,7 +277,7 @@ While the Pi 3, Pi 2 and Model B+ are better suited to using the Pi as a desktop
 
 Now that you have the code doing exactly what you want, you can put it into action (or into Babbage, to be more precise).
 
-1. Take a fresh Babbage, and make an incision in its rear end with scissors. Cut all across the bottom from the thighs, a little more than the width of the Pi.
+1. Take a fresh Babbage, and make an incision in its rear end with scissors. Cut all the way across the bottom from the thighs, a little more than the width of the Pi.
 
     ![](images/babbage-incision.jpg)
 
@@ -293,7 +293,7 @@ Now that you have the code doing exactly what you want, you can put it into acti
 
     ![](images/babbage-eye-removal.jpg)
 
-1. Insert the camera module into the bear, unattached, carefully positioning the camera lens pointing out of the eye hole.
+1. Insert the camera module into the bear, unattached, carefully positioning the camera lens so that it is pointing out of the eye socket.
 
     ![](images/babbage-camera-insertion.jpg)
 
@@ -321,7 +321,7 @@ Now that you have the code doing exactly what you want, you can put it into acti
 
     ![](images/babbage-safety-pins.jpg)
 
-1. Connect the Pi's power supply to a wall socket (or connect the battery pack) and wait for it to boot. Once it's ready, every time you press the button in the paw it will take a picture and tweet it!
+1. Connect the Pi's power supply to a wall socket (or connect the battery pack) and wait for it to boot. Once it's ready, every time you press the button in the paw, the Pi will take a picture and tweet it!
 
 Now you have a Tweeting Babbage!
 
@@ -329,8 +329,8 @@ Now you have a Tweeting Babbage!
 
 ## What next?
 
-- Try adding a text or image overlay to the picture before tweeting! See [Getting Started with Picamera](https://www.raspberrypi.org/learning/getting-started-with-picamera/) and the [picamera documentation](http://picamera.readthedocs.org/)
-- What else could you use as the input? You could use a motion sensor (or another sensor) instead of a button
-- You could use `TwythonStreamer` to take a photo when someone tweets a particular hashtag, or sends a tweet to your Babbage's Twitter account
-- What else could you use as the output? You could upload to another website using a different API or display on a screen somewhere
+- Try adding a text or image overlay to the picture before tweeting! See [Getting Started with Picamera](https://www.raspberrypi.org/learning/getting-started-with-picamera/) and the [picamera documentation](http://picamera.readthedocs.org/).
+- What else could you use as the input? You could use a motion sensor (or another sensor) instead of a button.
+- You could use `TwythonStreamer` to take a photo when someone tweets a particular hashtag, or sends a tweet to your Babbage's Twitter account.
+- What else could you use as the output? You could upload to another website using a different API or display on a screen somewhere.
 - Try making two Babbages tweet to each other in conversation!
