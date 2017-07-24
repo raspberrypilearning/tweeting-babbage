@@ -1,0 +1,30 @@
+---
+title: Tweeting Babbage
+hero_image: images/banner.png
+description: Make a Babbage Bear that takes photos and sends tweets!
+original_url: https://raspberrypi.org/learning/tweeting-babbage
+theme: blue
+duration: 2
+listed: false
+ingredient: false
+copyedit: false
+curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
+interests: ''
+technologies: ''
+site_areas: ''
+steps:
+- title: Introduction
+- title: What you will need
+- title: Tweeting Babbage
+- title: Take a picture with the camera module
+- title: Tweet a picture from the Pi camera
+- title: Use a timestamp
+- title: Wire up a GPIO button
+- title: Put it all together
+- title: Add continuation
+- title: Final code
+- title: Automation
+- title: Setting up the hardware
+- title: Tweeting Babbage
+- title: What next?
+
