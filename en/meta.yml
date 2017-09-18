@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: Tweeting Babbage
 hero_image: images/banner.png
@@ -28,3 +29,24 @@ steps:
 - title: Tweeting Babbage
 - title: What next?
 
+=======
+title: Tweeting Babbage
+hero_image: images/banner.png
+description: Tweet messages and pictures from your Raspberry Pi
+original_url: https://www.raspberrypi.org/learning/tweeting-babbage/
+theme: blue
+duration: 2
+listed: true
+ingredient: false
+copyedit: true
+interests: "photography, social media"
+technologies: "python, twitter, picamera"
+steps:
+  - title: Introduction
+  - title: What you'll need
+  - title: Taking pictures
+  - title: Taking pictures with a button
+  - title: Tweeting photos and text
+  - title: Modding your cuddly toy
+  - title: What next?
+>>>>>>> master
