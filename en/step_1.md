@@ -6,7 +6,7 @@ In this project you will turn an old cuddly toy into a Twitter bot that can post
 
 By creating a tweeting Babbage you will learn how to:
 
-- Use GPIO and a button to trigger the Camera Module
+- Use the GPIO pins and a button to trigger the Camera Module
 - Automate a Python script to run when the Raspberry Pi boots
 - Embed a Raspberry Pi inside a Babbage Bear
 
