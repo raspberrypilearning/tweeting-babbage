@@ -3,18 +3,23 @@ hero_image: images/banner.png
 description: Tweet messages and pictures from your Raspberry Pi
 original_url: https://www.raspberrypi.org/learning/tweeting-babbage/
 theme: blue
-duration: 2
+duration: 3
 listed: true
 ingredient: false
 copyedit: true
-curriculum: developer, design-0, programming-3, phys-comp-2, manufacture-0, community-0
-interests: "photography, social media"
-technologies: "python, twitter, picamera"
-steps:
-  - title: Introduction
-  - title: What you'll need
-  - title: Taking pictures
-  - title: Taking pictures with a button
-  - title: Tweeting photos and text
-  - title: Modding your cuddly toy
-  - title: What next?
+curriculum: 3, design-0, programming-3, phys-comp-2, manufacture-1, community-1
+interests: photography
+technologies: python, pi-camera
+hardware: pi-camera
+software: python
+site_areas: projects
+version: 4
+last_tested: 2017-01-01
+steps: 
+- title: Introduction
+- title: What you'll need
+- title: Taking pictures
+- title: Taking pictures with a button
+- title: Tweeting photos and text
+- title: Modding your cuddly toy
+- title: What next?
