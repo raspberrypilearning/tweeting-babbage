@@ -45,7 +45,7 @@ import json
 btn = Button(14)
 camera = PiCamera()
 
-with open('twitterauth.json') as file:
+with open('twitter_auth.json') as file:
     secrets = json.load(file)
 
 auth = tweepy.OAuthHandler(secrets['consumer_key'], secrets['consumer_secret'])
