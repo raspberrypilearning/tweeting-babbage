@@ -1,5 +1,7 @@
 ## Tweeting Babbage
 
+[[[camera-bullseye]]]
+
 In this project you will turn an old cuddly toy into a Twitter bot that can post pictures to your Twitter feed at the push of a button.
 
 ![babbage](images/tweeting-babbage.jpg)
