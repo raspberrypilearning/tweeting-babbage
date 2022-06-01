@@ -18,11 +18,13 @@ version: 4
 last_tested: 2017-01-01
 steps:
 - title: Introduction
-  completion: engaged
 - title: What you'll need
 - title: Taking pictures
 - title: Taking pictures with a button
+  completion:
+  - engaged
 - title: Tweeting photos and text
-  completion: internal
 - title: Modding your cuddly toy
+  completion:
+  - internal
 - title: What next?
