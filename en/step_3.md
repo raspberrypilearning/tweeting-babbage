@@ -45,7 +45,7 @@ camera.close()
 
 ```
 --- /hint --- --- hint ---
-![pic with time stamp](images/pic_with_time_stamp.gif)
+![Animation showing importing time stamp on a code editor](images/pic_with_time_stamp.gif)
 --- /hint --- --- /hints ---
 
 
