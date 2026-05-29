@@ -24,57 +24,13 @@ Have a look at the information below to learn how to create a Twitter account an
 
 [[[generic-python-random-choice]]]
 
---- hints --- --- hint ---
-Your code should follow this structure:
-1. Importing modules and creating objects
-1. A function that takes and saves a photo
-1. A funtion that posts a random phrase and photo to Twitter
-1. A function that calls the previous two functions
-1. A trigger that calls the third function when the button is pushed
---- /hint --- --- hint ---
-Here's some partially completed code to help you along:
-```python
-from picamera import PiCamera
-from datetime import datetime
-from time import sleep
-from gpiozero import Button
-from random import choice
-import tweepy
-import json
-
-btn = Button(14)
-camera = PiCamera()
-
-with open('twitter_auth.json') as file:
-    secrets = json.load(file)
-
-auth = tweepy.OAuthHandler(secrets['consumer_key'], secrets['consumer_secret'])
-auth.set_access_token(secrets['access_token'], secrets['access_token_secret'])
-
-twitter = tweepy.API(auth)
-
-status = [#Lots of different messages here]
-
-filename = ''
-
-def take_photo():
-    global filename
-	## code to get filename from timestamp
-	## code to take a photo
-
-def send_tweet():
-	##code to send tweet
-
-def go():
-    take_photo()
-    send_tweet()
-
-btn.when_pressed = go
-```
---- /hint --- --- hint ---
+--- hints ---
+--- hint ---
 Here's a video showing you how it's all done:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/lQD3csZ4E8k" frameborder="0" allowfullscreen></iframe>
---- /hint --- --- /hints ---
+--- /hint ---
+--- /hints ---
+
 
 - The final thing to do is to set up your Raspberry Pi so that the `tweeting_babbage.py` program starts automatically whenever the Pi is booted up.
 
